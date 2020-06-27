@@ -1,5 +1,5 @@
 {
-  "name": "react-native-video-watermark",
+  "name": "@react-native-video-watermark",
   "title": "React Native Video Watermark",
   "version": "1.1.0",
   "description": "use image as watermark over video",
