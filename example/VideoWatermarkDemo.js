@@ -37,7 +37,7 @@ class VideoWatermarkScreen extends PureComponent {
           onPress={() => {
             console.log('convert started');
             this.setState({ converting: true });
-            VideoWatermark.convert(this.state.videoUri, this.state.imgUri, convertedVideo => {
+            VideoWatermark.convert(this.state.videoUri, this.state.imgUri,'LEFT_TOP', convertedVideo => {
               setTimeout(() => {
                 console.log('came');
                 console.log(convertedVideo);
