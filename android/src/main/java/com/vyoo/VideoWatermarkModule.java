@@ -31,11 +31,11 @@ public class VideoWatermarkModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void convert(String videoPath, String imagePath, Callback callback) {
-      watermarkVideoWithImage(videoPath, imagePath, callback);
+  public void convert(String videoPath, String imagePath, String watermarkPosition, Callback callback) {
+      watermarkVideoWithImage(videoPath, imagePath, watermarkPosition, callback);
   }
 
-  public void watermarkVideoWithImage(String videoPath, String imagePath, final Callback callback) {
+  public void watermarkVideoWithImage(String videoPath, String imagePath, String watermarkPosition final Callback callback) {
     File destFile = new File(this.getReactApplicationContext().getFilesDir(), "converted.mp4");
       if (!destFile.exists()) {
           try {
@@ -45,10 +45,33 @@ public class VideoWatermarkModule extends ReactContextBaseJavaModule {
           }
       }
       final String destinationPath = destFile.getPath();
+      private Position wtrkMrkPos;
+      switch(watermarkPosition) {
+        
+        case "LEFT_TOP":
+            wtrkMrkPos = GlWatermarkFilter.Position.LEFT_TOP;
+            break;
 
+        case "LEFT_BOTTOM":
+            wtrkMrkPos = GlWatermarkFilter.Position.LEFT_BOTTOM;
+            break;
+                  
+        case "RIGHT_TOP":
+            wtrkMrkPos = GlWatermarkFilter.Position.RIGHT_TOP;
+            break;
+        
+        case "RIGHT_BOTTOM":
+            wtrkMrkPos = GlWatermarkFilter.Position.RIGHT_BOTTOM;
+            break;
+        
+        default 
+            wtrkMrkPos = GlWatermarkFilter.Position.LEFT_TOP;
+            break;
+            
+      }
       try {
           new Mp4Composer(Uri.fromFile(new File(videoPath)), destinationPath, reactContext)
-                  .filter(new GlWatermarkFilter(BitmapFactory.decodeStream(reactContext.getContentResolver().openInputStream(Uri.fromFile(new File(imagePath))))))
+                  .filter(new GlWatermarkFilter(BitmapFactory.decodeStream(reactContext.getContentResolver().openInputStream(Uri.fromFile(new File(imagePath))))), wtrkMrkPos)
                   .listener(new Mp4Composer.Listener() {
                       @Override
                       public void onProgress(double progress) {
@@ -73,4 +96,6 @@ public class VideoWatermarkModule extends ReactContextBaseJavaModule {
           e.printStackTrace();
       }
   }
+
+
 }

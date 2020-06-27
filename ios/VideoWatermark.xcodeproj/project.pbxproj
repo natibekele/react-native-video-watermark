@@ -26,6 +26,7 @@
 		134814201AA4EA6300B7C361 /* libVideoWatermark.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libVideoWatermark.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* VideoWatermark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWatermark.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* VideoWatermark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoWatermark.m; sourceTree = "<group>"; };
+		EAF5B29824A6A74600F8DD40 /* MyFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +51,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				EAF5B29824A6A74600F8DD40 /* MyFunctions.h */,
 				B3E7B5881CC2AC0600A0062D /* VideoWatermark.h */,
 				B3E7B5891CC2AC0600A0062D /* VideoWatermark.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -95,6 +97,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -216,7 +219,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",

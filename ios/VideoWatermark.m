@@ -1,16 +1,20 @@
 #import "VideoWatermark.h"
 #import <AVFoundation/AVFoundation.h>
+#import <React/RCTLog.h>
+#include "MyFunctions.h"
 
 @implementation VideoWatermark
 
+
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(convert:(NSString *)videoUri imageUri:(nonnull NSString *)imageUri callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(convert:(NSString *)videoUri imageUri:(nonnull NSString *)imageUri watermarkPosition:(nonnull NSString *)watermarkPosition callback:(RCTResponseSenderBlock)callback)
 {
-    [self watermarkVideoWithImage:videoUri imageUri:imageUri callback:callback];
+    RCTLogInfo(@"Checking passed variables %@ %@ %@", videoUri, imageUri, watermarkPosition);
+    [self watermarkVideoWithImage:videoUri imageUri:imageUri watermarkPosition:watermarkPosition callback:callback];
 }
 
--(void)watermarkVideoWithImage:(NSString *)videoUri imageUri:(NSString *)imageUri callback:(RCTResponseSenderBlock)callback
+-(void)watermarkVideoWithImage:(NSString *)videoUri imageUri:(NSString *)imageUri watermarkPosition:(NSString *)watermarkPosition callback:(RCTResponseSenderBlock)callback
 {
     
     AVURLAsset* videoAsset = [[AVURLAsset alloc]initWithURL:[NSURL fileURLWithPath:videoUri] options:nil];
@@ -34,7 +38,31 @@ RCT_EXPORT_METHOD(convert:(NSString *)videoUri imageUri:(nonnull NSString *)imag
     UIImage *myImage=[UIImage imageWithContentsOfFile:imageUri];
     
     UIGraphicsBeginImageContext(sizeOfVideo);
-    [myImage drawInRect:CGRectMake(0, 0, sizeOfVideo.width, sizeOfVideo.height)];
+    
+
+    int watermarkPositionInt = [MyFunctions getWatermarkInt:watermarkPosition];
+    switch(watermarkPositionInt) {
+        case 1:
+            [myImage drawInRect:CGRectMake(0, 0, 300, 300)];
+            break;        
+
+        case 2:
+            [myImage drawInRect:CGRectMake(0, sizeOfVideo.height -300, 300, 300)];
+            break;        
+
+        case 3:
+            [myImage drawInRect:CGRectMake(sizeOfVideo.width - 300, 0, 300, 300)];
+            break;        
+
+        case 4:
+            [myImage drawInRect:CGRectMake(sizeOfVideo.width -300, sizeOfVideo.height - 300, 300, 300)];
+            break;     
+            
+        default:
+            [myImage drawInRect:CGRectMake(0, 0, 300, 300)];
+            break;
+    }
+    // [myImage drawInRect:CGRectMake(0, 0, sizeOfVideo.width, sizeOfVideo.height)];
     UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     myImage = destImage;
@@ -109,3 +137,4 @@ RCT_EXPORT_METHOD(convert:(NSString *)videoUri imageUri:(nonnull NSString *)imag
 }
 
 @end
+
