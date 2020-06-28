@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-video-watermark.git",
-    "baseUrl": "https://github.com/github_account/react-native-video-watermark"
+    "url": "git+https://github.com/natibekele/react-native-video-watermark.git",
+    "baseUrl": "https://github.com/natibekele/react-native-video-watermark"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Sagar Khatri",
-    "email": "sagark1510@email.com"
+    "name": "Nathan Shanko",
+    "email": "natibekele@gmail.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
