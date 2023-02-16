@@ -71,13 +71,12 @@ public class VideoWatermarkModule extends ReactContextBaseJavaModule {
         }
         try {
             new Mp4Composer(Uri.fromFile(new File(videoPath)), destinationPath, reactContext)
-                    .filter(new GlWatermarkFilter(BitmapFactory.decodeStream(reactContext.getContentResolver().openInputStream(Uri.fromFile(new File(imagePath))))), wtrkMrkPos)
+                    .filter(new GlWatermarkFilter(BitmapFactory.decodeStream(reactContext.getContentResolver().openInputStream(Uri.fromFile(new File(imagePath))))))
                     .listener(new Mp4Composer.Listener() {
                         @Override
                         public void onProgress(double progress) {
                             Log.e("Progress", progress + "");
                         }
-
                         @Override
                         public void onCompleted() {
                             callback.invoke(destinationPath);
