@@ -35,7 +35,7 @@ public class VideoWatermarkModule extends ReactContextBaseJavaModule {
         watermarkVideoWithImage(videoPath, imagePath, watermarkPosition, callback);
     }
 
-    public void watermarkVideoWithImage(String videoPath, String imagePath, String watermarkPosition, final Callback callback Callback callback) {
+    public void watermarkVideoWithImage(String videoPath, String imagePath, String watermarkPosition, final Callback callback ) {
         File destFile = new File(this.getReactApplicationContext().getFilesDir(), "converted.mp4");
         if (!destFile.exists()) {
             try {
